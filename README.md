@@ -58,3 +58,21 @@ dotnet build -c Release      # needs the .NET 8 SDK; builds on Windows
 
 `Nailangs/Resources/Nailangs.keylayout` must match the Mac copy. The pop-out
 keyboard reads its dead-key table from it at runtime.
+
+## Microsoft Store build
+
+`.github/workflows/store.yml` builds the Store package on a GitHub Windows
+runner. No Windows PC is needed:
+
+1. In Partner Center, reserve the app name, then copy **Product identity**
+   into the GitHub repo's Actions variables: `STORE_IDENTITY_NAME`,
+   `STORE_PUBLISHER`, `STORE_PUBLISHER_DISPLAY_NAME` (and `STORE_DISPLAY_NAME`
+   if the reserved name isn't "Nailangs").
+2. Actions → **Microsoft Store package** → Run workflow, entering a version
+   higher than the last submission (or push a tag like `v1.0.1`).
+3. Download `Nailangs_<version>.msixbundle` from the run's Artifacts and
+   upload it in Partner Center → Packages. The Store signs it.
+
+The Store build has no Install tab: a Store app may not run the elevated
+layout installer. Users get the pop-out keyboard, which remaps the physical
+keys while it's open. `Package/` holds the manifest template and tile images.
