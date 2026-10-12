@@ -1,0 +1,569 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE keyboard SYSTEM "file://localhost/System/Library/DTDs/KeyboardLayout.dtd">
+<keyboard group="126" id="-19001" name="Nailangs" maxout="4">
+  <layouts>
+    <layout first="0" last="255" mapSet="ANSI" modifiers="modifiers"/>
+  </layouts>
+  <modifierMap id="modifiers" defaultIndex="0">
+    <keyMapSelect mapIndex="0">
+      <modifier keys=""/>
+    </keyMapSelect>
+    <keyMapSelect mapIndex="1">
+      <modifier keys="anyShift"/>
+    </keyMapSelect>
+    <keyMapSelect mapIndex="2">
+      <modifier keys="caps"/>
+    </keyMapSelect>
+    <keyMapSelect mapIndex="3">
+      <modifier keys="rightOption"/>
+    </keyMapSelect>
+  </modifierMap>
+  <keyMapSet id="ANSI">
+    <!-- index 0 : base (no modifier) -->
+    <keyMap index="0">
+      <key code="49" output=" "/>
+      <key code="36" output="&#x000D;"/>
+      <key code="48" output="&#x0009;"/>
+      <key code="50" output="gb"/>
+      <key code="18" output="&#x0253;"/>
+      <key code="19" output="&#x0257;"/>
+      <key code="20" action="sl_open3"/>
+      <key code="21" output="&#x0199;"/>
+      <key code="23" output="&#x01B4;"/>
+      <key code="22" action="sl_i6"/>
+      <key code="26" output="&#x1E45;"/>
+      <key code="28" action="sl_o8"/>
+      <key code="25" action="sl_u9"/>
+      <key code="29" action="sl_e0"/>
+      <key code="27" output="&#x1E63;"/>
+      <key code="24" output="&#x024D;"/>
+      <key code="12" output="q"/>
+      <key code="13" action="la_w"/>
+      <key code="14" action="la_e"/>
+      <key code="15" action="la_r"/>
+      <key code="17" action="la_t"/>
+      <key code="16" action="la_y"/>
+      <key code="32" action="la_u"/>
+      <key code="34" action="la_i"/>
+      <key code="31" action="la_o"/>
+      <key code="35" output="p"/>
+      <key code="33" output="&#x014B;"/>
+      <key code="30" action="sl_oc"/>
+      <key code="0" action="la_a"/>
+      <key code="1" action="la_s"/>
+      <key code="2" action="la_d"/>
+      <key code="3" output="f"/>
+      <key code="5" action="la_g"/>
+      <key code="4" output="h"/>
+      <key code="38" output="j"/>
+      <key code="40" action="la_k"/>
+      <key code="37" action="la_l"/>
+      <key code="41" output="&#x00E6;"/>
+      <key code="39" output="&#x0153;"/>
+      <key code="6" output="z"/>
+      <key code="7" output="x"/>
+      <key code="8" action="la_c"/>
+      <key code="9" output="v"/>
+      <key code="11" output="b"/>
+      <key code="45" action="la_n"/>
+      <key code="46" action="la_m"/>
+      <key code="43" output=","/>
+      <key code="47" output="."/>
+      <key code="44" action="sl_eps"/>
+      <key code="42" output="&#x0272;"/>
+      <key code="10" output="\"/>
+    </keyMap>
+    <!-- index 1 : anyShift -->
+    <keyMap index="1">
+      <key code="49" output=" "/>
+      <key code="36" output="&#x000D;"/>
+      <key code="48" output="&#x0009;"/>
+      <key code="50" output="&#x20A6;"/>
+      <key code="18" output="!"/>
+      <key code="19" output="&#x0022;"/>
+      <key code="20" output="&#x00A3;"/>
+      <key code="21" output="$"/>
+      <key code="23" output="%"/>
+      <key code="22" output="^"/>
+      <key code="26" output="&#x0026;"/>
+      <key code="28" output="*"/>
+      <key code="25" output="("/>
+      <key code="29" output=")"/>
+      <key code="27" output="_"/>
+      <key code="24" output="="/>
+      <key code="12" output="Q"/>
+      <key code="13" action="ua_w"/>
+      <key code="14" action="ua_e"/>
+      <key code="15" action="ua_r"/>
+      <key code="17" action="ua_t"/>
+      <key code="16" action="ua_y"/>
+      <key code="32" action="ua_u"/>
+      <key code="34" action="ua_i"/>
+      <key code="31" action="ua_o"/>
+      <key code="35" output="P"/>
+      <key code="33" output="{"/>
+      <key code="30" output="}"/>
+      <key code="0" action="ua_a"/>
+      <key code="1" action="ua_s"/>
+      <key code="2" action="ua_d"/>
+      <key code="3" output="F"/>
+      <key code="5" action="ua_g"/>
+      <key code="4" output="H"/>
+      <key code="38" output="J"/>
+      <key code="40" action="ua_k"/>
+      <key code="37" action="ua_l"/>
+      <key code="41" output=":"/>
+      <key code="39" output="@"/>
+      <key code="6" output="Z"/>
+      <key code="7" output="X"/>
+      <key code="8" action="ua_c"/>
+      <key code="9" output="V"/>
+      <key code="11" output="/"/>
+      <key code="45" output=";"/>
+      <key code="46" output="'"/>
+      <key code="43" output="&#x003C;"/>
+      <key code="47" output="&#x003E;"/>
+      <key code="44" output="?"/>
+      <key code="42" output="#"/>
+      <key code="10" output="|"/>
+    </keyMap>
+    <!-- index 2 : caps lock -->
+    <keyMap index="2">
+      <key code="49" output=" "/>
+      <key code="36" output="&#x000D;"/>
+      <key code="48" output="&#x0009;"/>
+      <key code="50" output="Gb"/>
+      <key code="18" output="&#x0181;"/>
+      <key code="19" output="&#x018A;"/>
+      <key code="20" action="su_open3"/>
+      <key code="21" output="&#x0198;"/>
+      <key code="23" output="&#x01B3;"/>
+      <key code="22" action="su_i6"/>
+      <key code="26" output="&#x1E44;"/>
+      <key code="28" action="su_o8"/>
+      <key code="25" action="su_u9"/>
+      <key code="29" action="su_e0"/>
+      <key code="27" output="&#x1E62;"/>
+      <key code="24" output="&#x024C;"/>
+      <key code="12" output="Q"/>
+      <key code="13" action="ua_w"/>
+      <key code="14" action="ua_e"/>
+      <key code="15" action="ua_r"/>
+      <key code="17" action="ua_t"/>
+      <key code="16" action="ua_y"/>
+      <key code="32" action="ua_u"/>
+      <key code="34" action="ua_i"/>
+      <key code="31" action="ua_o"/>
+      <key code="35" output="P"/>
+      <key code="33" output="&#x014A;"/>
+      <key code="30" action="su_oc"/>
+      <key code="0" action="ua_a"/>
+      <key code="1" action="ua_s"/>
+      <key code="2" action="ua_d"/>
+      <key code="3" output="F"/>
+      <key code="5" action="ua_g"/>
+      <key code="4" output="H"/>
+      <key code="38" output="J"/>
+      <key code="40" action="ua_k"/>
+      <key code="37" action="ua_l"/>
+      <key code="41" output="&#x00C6;"/>
+      <key code="39" output="&#x0152;"/>
+      <key code="6" output="Z"/>
+      <key code="7" output="X"/>
+      <key code="8" action="ua_c"/>
+      <key code="9" output="V"/>
+      <key code="11" output="B"/>
+      <key code="45" action="ua_n"/>
+      <key code="46" action="ua_m"/>
+      <key code="43" output=","/>
+      <key code="47" output="."/>
+      <key code="44" action="su_eps"/>
+      <key code="42" output="&#x019D;"/>
+      <key code="10" output="\"/>
+    </keyMap>
+    <!-- index 3 : rightOption (Alt Gr) -->
+    <keyMap index="3">
+      <key code="49" output=" "/>
+      <key code="36" output="&#x000D;"/>
+      <key code="48" output="&#x0009;"/>
+      <key code="50" output="&#x20AC;"/>
+      <key code="18" output="1"/>
+      <key code="19" output="2"/>
+      <key code="20" output="3"/>
+      <key code="21" output="4"/>
+      <key code="23" output="5"/>
+      <key code="22" output="6"/>
+      <key code="26" output="7"/>
+      <key code="28" output="8"/>
+      <key code="25" output="9"/>
+      <key code="29" output="0"/>
+      <key code="27" output="-"/>
+      <key code="24" output="+"/>
+      <key code="12" output="&#x00AC;"/>
+      <key code="13" output="&#x00A6;"/>
+      <key code="32" action="dead_macron"/>
+      <key code="31" action="dead_acute"/>
+      <key code="35" action="dead_tilde"/>
+      <key code="38" action="dead_circum"/>
+      <key code="40" action="dead_diaer"/>
+      <key code="34" action="dead_grave"/>
+      <key code="16" action="dead_stroke"/>
+      <key code="37" action="dead_cedil"/>
+      <key code="4" action="dead_bar"/>
+      <key code="33" output="["/>
+      <key code="30" output="]"/>
+      <key code="1" output="&#x1E9E;"/>
+      <key code="42" output="~"/>
+      <key code="44" output="&#x00DF;"/>
+    </keyMap>
+  </keyMapSet>
+  <actions>
+    <!-- dead-key entries: set the composing state -->
+    <action id="dead_grave"><when state="none" next="grave"/></action>
+    <action id="dead_acute"><when state="none" next="acute"/></action>
+    <action id="dead_tilde"><when state="none" next="tilde"/></action>
+    <action id="dead_circum"><when state="none" next="circum"/></action>
+    <action id="dead_diaer"><when state="none" next="diaer"/></action>
+    <action id="dead_cedil"><when state="none" next="cedil"/></action>
+    <action id="dead_macron"><when state="none" next="macron"/></action>
+    <action id="dead_stroke"><when state="none" next="stroke"/></action>
+    <action id="dead_bar"><when state="none" next="bar"/></action>
+    <!-- lowercase letter actions -->
+    <action id="la_a">
+      <when state="none" output="a"/>
+      <when state="grave" output="&#x00E0;"/>
+      <when state="acute" output="&#x00E1;"/>
+      <when state="tilde" output="&#x00E3;"/>
+      <when state="circum" output="&#x00E2;"/>
+      <when state="diaer" output="&#x00E4;"/>
+      <when state="cedil" output="&#x0061;&#x0327;"/>
+      <when state="macron" output="&#x0101;"/>
+    </action>
+    <action id="la_e">
+      <when state="none" output="e"/>
+      <when state="grave" output="&#x00E8;"/>
+      <when state="acute" output="&#x00E9;"/>
+      <when state="tilde" output="&#x1EBD;"/>
+      <when state="circum" output="&#x00EA;"/>
+      <when state="diaer" output="&#x00EB;"/>
+      <when state="cedil" output="&#x0229;"/>
+      <when state="macron" output="&#x0113;"/>
+    </action>
+    <action id="la_i">
+      <when state="none" output="i"/>
+      <when state="grave" output="&#x00EC;"/>
+      <when state="acute" output="&#x00ED;"/>
+      <when state="tilde" output="&#x0129;"/>
+      <when state="circum" output="&#x00EE;"/>
+      <when state="diaer" output="&#x00EF;"/>
+      <when state="cedil" output="&#x0069;&#x0327;"/>
+      <when state="macron" output="&#x012B;"/>
+      <when state="stroke" output="&#x0268;"/>
+      <when state="bar" output="&#x0268;"/>
+    </action>
+    <action id="la_o">
+      <when state="none" output="o"/>
+      <when state="grave" output="&#x00F2;"/>
+      <when state="acute" output="&#x00F3;"/>
+      <when state="tilde" output="&#x00F5;"/>
+      <when state="circum" output="&#x00F4;"/>
+      <when state="diaer" output="&#x00F6;"/>
+      <when state="cedil" output="&#x006F;&#x0327;"/>
+      <when state="macron" output="&#x014D;"/>
+      <when state="stroke" output="&#x00F8;"/>
+    </action>
+    <action id="la_u">
+      <when state="none" output="u"/>
+      <when state="grave" output="&#x00F9;"/>
+      <when state="acute" output="&#x00FA;"/>
+      <when state="tilde" output="&#x0169;"/>
+      <when state="circum" output="&#x00FB;"/>
+      <when state="diaer" output="&#x00FC;"/>
+      <when state="cedil" output="&#x0075;&#x0327;"/>
+      <when state="macron" output="&#x016B;"/>
+      <when state="stroke" output="&#x0289;"/>
+      <when state="bar" output="&#x0289;"/>
+    </action>
+    <action id="la_n">
+      <when state="none" output="n"/>
+      <when state="grave" output="&#x01F9;"/>
+      <when state="acute" output="&#x0144;"/>
+      <when state="tilde" output="&#x00F1;"/>
+      <when state="cedil" output="&#x0146;"/>
+    </action>
+    <action id="la_m">
+      <when state="none" output="m"/>
+      <when state="grave" output="&#x006D;&#x0300;"/>
+      <when state="acute" output="&#x1E3F;"/>
+      <when state="cedil" output="&#x006D;&#x0327;"/>
+    </action>
+    <action id="la_y">
+      <when state="none" output="y"/>
+      <when state="diaer" output="&#x00FF;"/>
+    </action>
+    <action id="la_w">
+      <when state="none" output="w"/>
+      <when state="diaer" output="&#x1E85;"/>
+    </action>
+    <action id="la_s">
+      <when state="none" output="s"/>
+      <when state="cedil" output="&#x015F;"/>
+    </action>
+    <action id="la_t">
+      <when state="none" output="t"/>
+      <when state="cedil" output="&#x0163;"/>
+      <when state="stroke" output="&#x0167;"/>
+    </action>
+    <action id="la_c">
+      <when state="none" output="c"/>
+      <when state="tilde" output="&#x0063;&#x0303;"/>
+      <when state="cedil" output="&#x00E7;"/>
+    </action>
+    <action id="la_g">
+      <when state="none" output="g"/>
+      <when state="cedil" output="&#x0123;"/>
+    </action>
+    <action id="la_k">
+      <when state="none" output="k"/>
+      <when state="cedil" output="&#x0137;"/>
+    </action>
+    <action id="la_l">
+      <when state="none" output="l"/>
+      <when state="cedil" output="&#x013C;"/>
+      <when state="stroke" output="&#x0142;"/>
+    </action>
+    <action id="la_r">
+      <when state="none" output="r"/>
+      <when state="tilde" output="&#x0072;&#x0303;"/>
+      <when state="cedil" output="&#x0157;"/>
+    </action>
+    <action id="la_d">
+      <when state="none" output="d"/>
+      <when state="stroke" output="&#x0111;"/>
+    </action>
+    <!-- uppercase letter actions -->
+    <action id="ua_a">
+      <when state="none" output="A"/>
+      <when state="grave" output="&#x00C0;"/>
+      <when state="acute" output="&#x00C1;"/>
+      <when state="tilde" output="&#x00C3;"/>
+      <when state="circum" output="&#x00C2;"/>
+      <when state="diaer" output="&#x00C4;"/>
+      <when state="cedil" output="&#x0041;&#x0327;"/>
+      <when state="macron" output="&#x0100;"/>
+    </action>
+    <action id="ua_e">
+      <when state="none" output="E"/>
+      <when state="grave" output="&#x00C8;"/>
+      <when state="acute" output="&#x00C9;"/>
+      <when state="tilde" output="&#x1EBC;"/>
+      <when state="circum" output="&#x00CA;"/>
+      <when state="diaer" output="&#x00CB;"/>
+      <when state="cedil" output="&#x0228;"/>
+      <when state="macron" output="&#x0112;"/>
+    </action>
+    <action id="ua_i">
+      <when state="none" output="I"/>
+      <when state="grave" output="&#x00CC;"/>
+      <when state="acute" output="&#x00CD;"/>
+      <when state="tilde" output="&#x0128;"/>
+      <when state="circum" output="&#x00CE;"/>
+      <when state="diaer" output="&#x00CF;"/>
+      <when state="cedil" output="&#x0049;&#x0327;"/>
+      <when state="macron" output="&#x012A;"/>
+      <when state="stroke" output="&#x0197;"/>
+      <when state="bar" output="&#x0197;"/>
+    </action>
+    <action id="ua_o">
+      <when state="none" output="O"/>
+      <when state="grave" output="&#x00D2;"/>
+      <when state="acute" output="&#x00D3;"/>
+      <when state="tilde" output="&#x00D5;"/>
+      <when state="circum" output="&#x00D4;"/>
+      <when state="diaer" output="&#x00D6;"/>
+      <when state="cedil" output="&#x004F;&#x0327;"/>
+      <when state="macron" output="&#x014C;"/>
+      <when state="stroke" output="&#x00D8;"/>
+    </action>
+    <action id="ua_u">
+      <when state="none" output="U"/>
+      <when state="grave" output="&#x00D9;"/>
+      <when state="acute" output="&#x00DA;"/>
+      <when state="tilde" output="&#x0168;"/>
+      <when state="circum" output="&#x00DB;"/>
+      <when state="diaer" output="&#x00DC;"/>
+      <when state="cedil" output="&#x0055;&#x0327;"/>
+      <when state="macron" output="&#x016A;"/>
+      <when state="stroke" output="&#x0244;"/>
+      <when state="bar" output="&#x0244;"/>
+    </action>
+    <action id="ua_n">
+      <when state="none" output="N"/>
+      <when state="grave" output="&#x01F8;"/>
+      <when state="acute" output="&#x0143;"/>
+      <when state="tilde" output="&#x00D1;"/>
+      <when state="cedil" output="&#x0145;"/>
+    </action>
+    <action id="ua_m">
+      <when state="none" output="M"/>
+      <when state="grave" output="&#x004D;&#x0300;"/>
+      <when state="acute" output="&#x1E3E;"/>
+      <when state="cedil" output="&#x004D;&#x0327;"/>
+    </action>
+    <action id="ua_y">
+      <when state="none" output="Y"/>
+      <when state="diaer" output="&#x0178;"/>
+    </action>
+    <action id="ua_w">
+      <when state="none" output="W"/>
+      <when state="diaer" output="&#x1E84;"/>
+    </action>
+    <action id="ua_s">
+      <when state="none" output="S"/>
+      <when state="cedil" output="&#x015E;"/>
+    </action>
+    <action id="ua_t">
+      <when state="none" output="T"/>
+      <when state="cedil" output="&#x0162;"/>
+      <when state="stroke" output="&#x0166;"/>
+    </action>
+    <action id="ua_c">
+      <when state="none" output="C"/>
+      <when state="tilde" output="&#x0043;&#x0303;"/>
+      <when state="cedil" output="&#x00C7;"/>
+    </action>
+    <action id="ua_g">
+      <when state="none" output="G"/>
+      <when state="cedil" output="&#x0122;"/>
+    </action>
+    <action id="ua_k">
+      <when state="none" output="K"/>
+      <when state="cedil" output="&#x0136;"/>
+    </action>
+    <action id="ua_l">
+      <when state="none" output="L"/>
+      <when state="cedil" output="&#x013B;"/>
+      <when state="stroke" output="&#x0141;"/>
+    </action>
+    <action id="ua_r">
+      <when state="none" output="R"/>
+      <when state="tilde" output="&#x0052;&#x0303;"/>
+      <when state="cedil" output="&#x0156;"/>
+    </action>
+    <action id="ua_d">
+      <when state="none" output="D"/>
+      <when state="stroke" output="&#x0110;"/>
+    </action>
+    <!-- Nailangs special vowels, lowercase (base layer) -->
+    <action id="sl_e0">
+      <when state="none" output="&#x1EB9;"/>
+      <when state="grave" output="&#x1EB9;&#x0300;"/>
+      <when state="acute" output="&#x1EB9;&#x0301;"/>
+      <when state="tilde" output="&#x1EB9;&#x0303;"/>
+      <when state="circum" output="&#x1EC7;"/>
+      <when state="macron" output="&#x1EB9;&#x0304;"/>
+    </action>
+    <action id="sl_o8">
+      <when state="none" output="&#x1ECD;"/>
+      <when state="grave" output="&#x1ECD;&#x0300;"/>
+      <when state="acute" output="&#x1ECD;&#x0301;"/>
+      <when state="tilde" output="&#x1ECD;&#x0303;"/>
+      <when state="circum" output="&#x1ED9;"/>
+    </action>
+    <action id="sl_u9">
+      <when state="none" output="&#x1EE5;"/>
+      <when state="grave" output="&#x1EE5;&#x0300;"/>
+      <when state="acute" output="&#x1EE5;&#x0301;"/>
+    </action>
+    <action id="sl_i6">
+      <when state="none" output="&#x1ECB;"/>
+      <when state="grave" output="&#x1ECB;&#x0300;"/>
+      <when state="acute" output="&#x1ECB;&#x0301;"/>
+      <when state="tilde" output="&#x1ECB;&#x0303;"/>
+      <when state="macron" output="&#x1ECB;&#x0304;"/>
+    </action>
+    <action id="sl_open3">
+      <when state="none" output="&#x01DD;"/>
+      <when state="grave" output="&#x01DD;&#x0300;"/>
+      <when state="acute" output="&#x01DD;&#x0301;"/>
+      <when state="tilde" output="&#x01DD;&#x0303;"/>
+      <when state="cedil" output="&#x01DD;&#x0327;"/>
+      <when state="macron" output="&#x01DD;&#x0304;"/>
+    </action>
+    <action id="sl_oc">
+      <when state="none" output="&#x0254;"/>
+      <when state="grave" output="&#x0254;&#x0300;"/>
+      <when state="acute" output="&#x0254;&#x0301;"/>
+      <when state="tilde" output="&#x0254;&#x0303;"/>
+      <when state="circum" output="&#x0254;&#x0302;"/>
+      <when state="diaer" output="&#x0254;&#x0308;"/>
+      <when state="cedil" output="&#x0254;&#x0327;"/>
+      <when state="macron" output="&#x0254;&#x0304;"/>
+    </action>
+    <action id="sl_eps">
+      <when state="none" output="&#x025B;"/>
+      <when state="cedil" output="&#x025B;&#x0327;"/>
+    </action>
+    <!-- Nailangs special vowels, uppercase (caps layer) -->
+    <action id="su_e0">
+      <when state="none" output="&#x1EB8;"/>
+      <when state="grave" output="&#x1EB8;&#x0300;"/>
+      <when state="acute" output="&#x1EB8;&#x0301;"/>
+      <when state="tilde" output="&#x1EB8;&#x0303;"/>
+      <when state="circum" output="&#x1EC6;"/>
+      <when state="macron" output="&#x1EB8;&#x0304;"/>
+    </action>
+    <action id="su_o8">
+      <when state="none" output="&#x1ECC;"/>
+      <when state="grave" output="&#x1ECC;&#x0300;"/>
+      <when state="acute" output="&#x1ECC;&#x0301;"/>
+      <when state="tilde" output="&#x1ECC;&#x0303;"/>
+      <when state="circum" output="&#x1ED8;"/>
+    </action>
+    <action id="su_u9">
+      <when state="none" output="&#x1EE4;"/>
+      <when state="grave" output="&#x1EE4;&#x0300;"/>
+      <when state="acute" output="&#x1EE4;&#x0301;"/>
+    </action>
+    <action id="su_i6">
+      <when state="none" output="&#x1ECA;"/>
+      <when state="grave" output="&#x1ECA;&#x0300;"/>
+      <when state="acute" output="&#x1ECA;&#x0301;"/>
+      <when state="tilde" output="&#x1ECA;&#x0303;"/>
+      <when state="macron" output="&#x1ECA;&#x0304;"/>
+    </action>
+    <action id="su_open3">
+      <when state="none" output="&#x018E;"/>
+      <when state="grave" output="&#x018E;&#x0300;"/>
+      <when state="acute" output="&#x018E;&#x0301;"/>
+      <when state="tilde" output="&#x018E;&#x0303;"/>
+      <when state="cedil" output="&#x018E;&#x0327;"/>
+      <when state="macron" output="&#x018E;&#x0304;"/>
+    </action>
+    <action id="su_oc">
+      <when state="none" output="&#x0186;"/>
+      <when state="grave" output="&#x0186;&#x0300;"/>
+      <when state="acute" output="&#x0186;&#x0301;"/>
+      <when state="tilde" output="&#x0186;&#x0303;"/>
+      <when state="circum" output="&#x0186;&#x0302;"/>
+      <when state="diaer" output="&#x0186;&#x0308;"/>
+      <when state="cedil" output="&#x0186;&#x0327;"/>
+      <when state="macron" output="&#x0186;&#x0304;"/>
+    </action>
+    <action id="su_eps">
+      <when state="none" output="&#x0190;"/>
+      <when state="cedil" output="&#x0190;&#x0327;"/>
+    </action>
+  </actions>
+  <terminators>
+    <when state="grave" output="&#x0060;"/>
+    <when state="acute" output="&#x00B4;"/>
+    <when state="tilde" output="&#x007E;"/>
+    <when state="circum" output="&#x005E;"/>
+    <when state="diaer" output="&#x00A8;"/>
+    <when state="cedil" output="&#x00B8;"/>
+    <when state="macron" output="&#x00AF;"/>
+    <when state="stroke" output="&#x002F;"/>
+    <when state="bar" output="&#x007C;"/>
+  </terminators>
+</keyboard>

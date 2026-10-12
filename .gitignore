@@ -1,0 +1,13 @@
+.DS_Store
+bin/
+obj/
+.vs/
+*.user
+
+# Store packaging scratch (built in CI)
+stage/
+out/
+dist/
+*.msix
+*.msixbundle
+*.msixupload

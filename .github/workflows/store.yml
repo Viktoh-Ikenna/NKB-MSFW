@@ -1,0 +1,122 @@
+# Builds the Microsoft Store package (.msixbundle, x64 + ARM64) on a Windows
+# runner. Download it from the run's Artifacts and upload it in Partner Center →
+# your app → Packages. The Store signs it, so no certificate is needed here.
+#
+# One-time setup — GitHub repo → Settings → Secrets and variables → Actions →
+# Variables, copied from Partner Center → your app → Product identity:
+#   STORE_IDENTITY_NAME            Package/Identity/Name           e.g. 12345Nailangs.Nailangs
+#   STORE_PUBLISHER                Package/Identity/Publisher      e.g. CN=ABCD1234-...
+#   STORE_PUBLISHER_DISPLAY_NAME   Package/Properties/PublisherDisplayName
+#   STORE_DISPLAY_NAME             (optional) reserved app name, default "Nailangs"
+#
+# Run it: Actions → "Microsoft Store package" → Run workflow, or push a tag
+# like v1.0.1. The version must go up on every Store submission.
+
+name: Microsoft Store package
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version (major.minor.build) — must be higher than the last Store submission"
+        required: true
+        default: "1.0.0"
+  push:
+    tags: ["v*"]
+
+jobs:
+  package:
+    runs-on: windows-latest
+    env:
+      IDENTITY_NAME: ${{ vars.STORE_IDENTITY_NAME }}
+      PUBLISHER: ${{ vars.STORE_PUBLISHER }}
+      PUBLISHER_DISPLAY_NAME: ${{ vars.STORE_PUBLISHER_DISPLAY_NAME }}
+      DISPLAY_NAME: ${{ vars.STORE_DISPLAY_NAME || 'Nailangs' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Check Partner Center identity
+        shell: pwsh
+        run: |
+          $missing = 'IDENTITY_NAME', 'PUBLISHER', 'PUBLISHER_DISPLAY_NAME' |
+            Where-Object { -not [Environment]::GetEnvironmentVariable($_) }
+          if ($missing) {
+            throw "Set these repository variables (Settings → Secrets and variables → Actions → Variables): " +
+                  (($missing | ForEach-Object { "STORE_$_" }) -join ', ')
+          }
+
+      - name: Resolve version
+        id: ver
+        shell: pwsh
+        run: |
+          $v = '${{ github.event.inputs.version }}'
+          if (-not $v) { $v = '${{ github.ref_name }}'.TrimStart('v') }
+          if ($v -notmatch '^\d+\.\d+\.\d+$') { throw "Version must be major.minor.build (e.g. 1.0.1), got '$v'" }
+          "app=$v"       >> $env:GITHUB_OUTPUT
+          "package=$v.0" >> $env:GITHUB_OUTPUT   # the Store requires the 4th part to be 0
+
+      - name: Add Windows SDK tools to PATH
+        shell: pwsh
+        run: |
+          $bin = Get-ChildItem 'C:\Program Files (x86)\Windows Kits\10\bin\10.*' -Directory |
+            Sort-Object { [version]$_.Name } | Select-Object -Last 1
+          if (-not $bin) { throw "Windows SDK not found on the runner" }
+          "$($bin.FullName)\x64" >> $env:GITHUB_PATH
+
+      - name: Build packages
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $version = '${{ steps.ver.outputs.package }}'
+          New-Item -ItemType Directory -Force out | Out-Null
+
+          foreach ($arch in 'x64', 'arm64') {
+            $dir = "stage\$arch"
+
+            # Self-contained: the Store has no .NET 8 framework package to depend on.
+            dotnet publish Nailangs/Nailangs.csproj -c Release -r "win-$arch" --self-contained true `
+              -p:StoreBuild=true -p:Version=${{ steps.ver.outputs.app }} -o $dir
+            if ($LASTEXITCODE) { throw "dotnet publish failed for $arch" }
+
+            Copy-Item Package\Images "$dir\Images" -Recurse
+
+            # Fill the $TOKENS$ (XML-escaped; plain string replace, not regex).
+            $tokens = [ordered]@{
+              '$IDENTITY_NAME$'          = $env:IDENTITY_NAME
+              '$PUBLISHER_DISPLAY_NAME$' = $env:PUBLISHER_DISPLAY_NAME
+              '$PUBLISHER$'              = $env:PUBLISHER
+              '$DISPLAY_NAME$'           = $env:DISPLAY_NAME
+              '$VERSION$'                = $version
+              '$ARCH$'                   = $arch
+            }
+            $manifest = Get-Content Package\AppxManifest.xml -Raw
+            foreach ($t in $tokens.GetEnumerator()) {
+              $manifest = $manifest.Replace($t.Key, [System.Security.SecurityElement]::Escape($t.Value))
+            }
+            if ($manifest -match '\$[A-Z_]+\$') { throw "Unfilled manifest token: $($Matches[0])" }
+            Set-Content "$dir\AppxManifest.xml" $manifest -Encoding utf8
+
+            # Resource index for the logos (scale-100 / scale-200).
+            makepri createconfig /cf stage\priconfig.xml /dq en-US /o
+            if ($LASTEXITCODE) { throw "makepri createconfig failed" }
+            makepri new /pr $dir /cf stage\priconfig.xml /of "$dir\resources.pri" /o
+            if ($LASTEXITCODE) { throw "makepri new failed for $arch" }
+
+            makeappx pack /d $dir /p "out\Nailangs_${version}_$arch.msix" /o
+            if ($LASTEXITCODE) { throw "makeappx pack failed for $arch" }
+          }
+
+          New-Item -ItemType Directory -Force dist | Out-Null
+          makeappx bundle /d out /p "dist\Nailangs_$version.msixbundle" /bv $version /o
+          if ($LASTEXITCODE) { throw "makeappx bundle failed" }
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: Nailangs-store-${{ steps.ver.outputs.package }}
+          path: dist/*.msixbundle
+          if-no-files-found: error

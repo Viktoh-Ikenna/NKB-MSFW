@@ -1,0 +1,45 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <Nullable>enable</Nullable>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <AssemblyName>Nailangs</AssemblyName>
+    <RootNamespace>Nailangs</RootNamespace>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+    <ApplicationIcon>Resources\Nailangs.ico</ApplicationIcon>
+    <Version>1.0.0</Version>
+    <!-- No App.xaml: Program.Main is the entry point -->
+    <StartupObject>Nailangs.Program</StartupObject>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Brand logos shown in-app (accent key, install header). Resource build
+         action so they load via pack:// URIs. -->
+    <None Remove="Resources\nailangs-mark.png" />
+    <None Remove="Resources\nailangs-banner.png" />
+    <Resource Include="Resources\nailangs-mark.png" />
+    <Resource Include="Resources\nailangs-banner.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- The macOS keylayout is the single source of truth for dead-key
+         composition; it is parsed at runtime. Keep it in sync with the Mac app. -->
+    <EmbeddedResource Include="Resources\Nailangs.keylayout">
+      <LogicalName>Nailangs.keylayout</LogicalName>
+    </EmbeddedResource>
+  </ItemGroup>
+
+  <!-- StoreBuild=true (set by the Store workflow) leaves the layout installer
+       out: a Store app may not run it. -->
+  <ItemGroup Condition="'$(StoreBuild)' != 'true'">
+    <!-- Windows layout source (Nailangs.klc) plus the MSKLC build output
+         (setup.exe + MSIs) once it has been built — shipped as layout\ next to
+         the exe, where LayoutInstaller looks for setup.exe. -->
+    <None Include="..\layout\**\*" Exclude="..\layout\*.py" Link="layout\%(RecursiveDir)%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>
