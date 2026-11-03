@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- MSIX manifest for the Microsoft Store build. The $TOKENS$ are filled in by
+<!-- MSIX manifest for the Microsoft Store build. The dollar-sign tokens are filled in by
      .github/workflows/store.yml from the repository variables, which must match
      Partner Center → your app → Product identity. -->
 <Package
