@@ -1,0 +1,97 @@
+# Microsoft Store screenshots, captured from the real Store build on a Windows
+# runner: builds the x64 MSIX exactly as store.yml does, signs it with a
+# throwaway certificate so it can be installed here, installs it, and runs
+# Package/screenshots/capture.ps1. Download the PNGs from the run's Artifacts.
+#
+# Runs when the screenshot files change, or from Actions → "Store screenshots".
+
+name: Store screenshots
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/screenshots.yml"
+      - "Package/screenshots/**"
+
+jobs:
+  screenshots:
+    runs-on: windows-latest
+    env:
+      IDENTITY_NAME: ${{ vars.STORE_IDENTITY_NAME }}
+      PUBLISHER: ${{ vars.STORE_PUBLISHER }}
+      PUBLISHER_DISPLAY_NAME: ${{ vars.STORE_PUBLISHER_DISPLAY_NAME }}
+      DISPLAY_NAME: ${{ vars.STORE_DISPLAY_NAME || 'Nailangs' }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: "8.0.x"
+
+      - name: Add Windows SDK tools to PATH
+        shell: pwsh
+        run: |
+          $bin = Get-ChildItem 'C:\Program Files (x86)\Windows Kits\10\bin\10.*' -Directory |
+            Sort-Object { [version]$_.Name } | Select-Object -Last 1
+          "$($bin.FullName)\x64" >> $env:GITHUB_PATH
+
+      - name: Build x64 package
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $dir = 'stage\x64'
+          dotnet publish Nailangs/Nailangs.csproj -c Release -r win-x64 --self-contained true `
+            -p:StoreBuild=true -o $dir
+          if ($LASTEXITCODE) { throw "dotnet publish failed" }
+          Copy-Item Package\Images "$dir\Images" -Recurse
+
+          $tokens = [ordered]@{
+            '$IDENTITY_NAME$'          = $env:IDENTITY_NAME
+            '$PUBLISHER_DISPLAY_NAME$' = $env:PUBLISHER_DISPLAY_NAME
+            '$PUBLISHER$'              = $env:PUBLISHER
+            '$DISPLAY_NAME$'           = $env:DISPLAY_NAME
+            '$VERSION$'                = '1.0.0.0'
+            '$ARCH$'                   = 'x64'
+          }
+          $manifest = Get-Content Package\AppxManifest.xml -Raw
+          foreach ($t in $tokens.GetEnumerator()) {
+            $manifest = $manifest.Replace($t.Key, [System.Security.SecurityElement]::Escape($t.Value))
+          }
+          Set-Content "$dir\AppxManifest.xml" $manifest -Encoding utf8
+
+          makepri createconfig /cf stage\priconfig.xml /dq en-US /o
+          makepri new /pr $dir /cf stage\priconfig.xml /of "$dir\resources.pri" /o
+          if ($LASTEXITCODE) { throw "makepri failed" }
+          makeappx pack /d $dir /p Nailangs.msix /o
+          if ($LASTEXITCODE) { throw "makeappx failed" }
+
+      # The Store signs the real package; here a self-signed certificate whose
+      # subject matches the manifest Publisher lets Windows install it.
+      - name: Sign and install
+        shell: pwsh
+        run: |
+          $ErrorActionPreference = 'Stop'
+          $cert = New-SelfSignedCertificate -Type Custom -Subject $env:PUBLISHER -KeyUsage DigitalSignature `
+            -CertStoreLocation Cert:\CurrentUser\My `
+            -TextExtension @('2.5.29.37={text}1.3.6.1.5.5.7.3.3', '2.5.29.19={text}')
+          $pw = ConvertTo-SecureString -String 'screenshots' -Force -AsPlainText
+          Export-PfxCertificate -Cert $cert -FilePath sign.pfx -Password $pw | Out-Null
+          Import-PfxCertificate -FilePath sign.pfx -Password $pw -CertStoreLocation Cert:\LocalMachine\TrustedPeople | Out-Null
+          signtool sign /fd SHA256 /f sign.pfx /p screenshots Nailangs.msix
+          if ($LASTEXITCODE) { throw "signtool failed" }
+          Add-AppxPackage Nailangs.msix
+          Get-AppxPackage -Name $env:IDENTITY_NAME | Format-List Name, PackageFamilyName, Version
+
+      - name: Capture screenshots
+        shell: powershell
+        run: .\Package\screenshots\capture.ps1 -IdentityName $env:IDENTITY_NAME -Out screenshots
+
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: Nailangs-screenshots
+          path: screenshots/*.png
+          if-no-files-found: warn
